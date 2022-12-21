@@ -10,7 +10,7 @@ const { connect } = require("./config/db");
 const main = async () => {
     try {
         // connect to database
-        await connect();
+        connect();
 
         const app = express();
 
@@ -41,6 +41,7 @@ const main = async () => {
         app.listen(port, () => {
             console.log(`Server listening on port ${port} 🚀🚀🚀`);
         });
+        module.exports = app;
     } catch (error) {
         console.error(error);
     }

@@ -16,6 +16,9 @@ async function createPost(req, res) {
     const user = await User.findById(user_id);
 
     // Add the post ID to the user's posts list
+    if (!user) {
+        return res.status(404).json({ error: "User not found" });
+    }
     user.posts.push(post._id);
     await user.save();
 
@@ -77,7 +80,6 @@ async function getPost(req, res) {
 
 async function getAllPosts(req, res) {
     const { user_id } = req.user;
-
     // Find the authenticated user and their posts
     const user = await User.findById(user_id).populate(
         "posts",

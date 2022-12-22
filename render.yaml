@@ -1,0 +1,24 @@
+services:
+    # A Docker web service
+    - type: web
+      name: reunion
+      env: docker
+      repo: https://github.com/render-examples/webdis.git # optional
+      rootDir: webdis
+      envVars:
+          - key: REDIS_HOST
+            fromService:
+                type: redis
+                name: lightning
+                property: host # available properties are listed below
+          - key: REDIS_PORT
+            fromService:
+                type: redis
+                name: lightning
+                property: port
+          - fromGroup: conc-settings
+
+databases:
+    - name: mongo
+      databaseName: social-media # optional (Render may add a suffix)
+      user: root # optional

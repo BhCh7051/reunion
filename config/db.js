@@ -18,10 +18,7 @@ const authSource = encodeURIComponent("admin");
 
 mongoose.set("strictQuery", true);
 
-const dbConnectionStringURI =
-    ENV === "production"
-        ? `mongodb://${username}:${password}@${url}:${port}/${database}?authSource=${authSource}`
-        : `mongodb://${url}:${port}/${database}?authSource=${authSource}`;
+const dbConnectionStringURI = `mongodb+srv://${username}:${password}@${url}/?retryWrites=true&w=majority`;
 
 mongoose.connect(dbConnectionStringURI, {
     useNewUrlParser: true,

@@ -6,7 +6,7 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 let rootJwtToken,
-    user_id = "63a3c85b0fcf805a54137d8f",
+    user_id = "63a3e3df6ca6d3824fc3eca2",
     post_id,
     anotherPost_id = "63a3c79c0fcf805a54137d8a";
 

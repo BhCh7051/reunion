@@ -4,13 +4,39 @@
 
 This API allows users to authenticate, follow other users, create and delete posts, like and unlike posts, and add comments to posts on a social media platform.
 
-# Database Schema
-<p align="center">
-<img src= https://mermaid.ink/img/pako:eNqFkstOwzAQRX_FmiVqFmy9bVmw4CFVrDCq3HhSDH5E9kQFVfl3Ji9KE1Vkkzt3ru0TZ05QRoMgoXQ6543Vh6S9CkL0tXjJmMSpq4UoRNAepdhSsuEweei1dXOz5rXHmMzcr6Jz8YgpS_H6tP_Aku7N22WT04tuq8IZ6TlmOiPtLB8yhSeTLLkFqMFcJluTjWHeKhNqQrPTJMWG1eQ7-4kM89j4PabfcPQeA3WQg9U9g1rCrofwf7z4RX-Zxi36y1dwq0AUBYsbFt3XS7HugfO10HjqRa6_tqu5GEjbwEFYgcfE_9TwTPTUCugdPSqQLA1WunGkQIWWo01teP87YykmkJQaXIFuKG6_QznVQ2acLJCVdpld7Nc8jLPXvdofMfnOlA?type=png>
-</p>
+```mermaid
+classDiagram
+  class User {
+    - name: String
+    - email: String
+    - password: String
+    - followers: [ObjectId]
+    - followings: [ObjectId]
+  }
+
+  class Post {
+    - _id: ObjectId
+    - title: String
+    - description: String
+    - created_at: Date
+    - likes: Number
+    - comments: [
+
+    ]
+  }
+
+  class Comment {
+    - _id: ObjectId
+    - text: String
+  }
+
+  User "1" -- "*" Post: Creates
+  User "1" -- "*" Comment: Creates
+  Post "1" -- "*" Comment: Contains
+```
 
 The database consists of the following collections:
-    users: stores the user documents, with fields for the user's name, email, password, followers, and followings.
+users: stores the user documents, with fields for the user's name, email, password, followers, and followings.
 
     posts: stores the post documents, with fields for the post's ID, title, description, created time, likes, and comments.
 
@@ -44,7 +70,18 @@ The following endpoints are implemented:
 
 # Data Flow Diagram
 
-![Data Flow Diagram](https://mermaid.ink/svg/pako:eNplkMFuwjAQRH_F2jP8gA9IiHDoAQmVqy-LvaGWknW6XleqEP-Ok5QgpSfbOzNvrbmDT4HAQqbvQuypiXgT7B0bM6Bo9HFAVnPoIrGup_vzh7mQ_JCslQYVr5jJ8ajM6e1u9w7YenIwMq7NE_itVeMrb83ee8rZhAVoFvgK-ElahCfnP978g8UjlIfEIw020JP0GEMt4T7mHOgX9eTA1mugFkunDhw_qrUMlU7HEDUJWJVCG8Ci6fLL_vWePX89gm2xy3VKU-Y0l-0Tt_EGjycHVIUP)
+```mermaid
+sequenceDiagram
+  participant Client
+  participant API Server
+  participant Database
+
+  Client->>API Server: Send request
+  API Server->>Database: Access database
+  Database->>API Server: Return data
+  API Server->>Client: Return response
+
+```
 
 The client sends a request to the API server, which processes the request, accesses the database, and returns a response to the client.
 

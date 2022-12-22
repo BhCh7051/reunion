@@ -74,6 +74,27 @@ project/
 └── server.js (entry point fоr the API server)
 ```
 
+# Requirements
+
+1. NodeJS (v16 or higher) for running natively.
+2. Docker and Docker Compose
+
+# Tech Stack
+
+1. [ReactJS](https://reactjs.org/) for client side.
+2. [NodeJS](https://nodejs.org/en/) for server side.
+3. [Docker](https://www.docker.com/) for containerization.
+4. [Docker Compose](https://docs.docker.com/compose/) for container orchestration.
+5. [MongoDB](https://www.mongodb.com/) for database.
+
+# Steps to run the plugin
+
+## Start the docker container
+
+```bash
+docker-compose up -d
+```
+
 <h3 align="left">Connect with me:</h3>
 <p align="left">
 <a href="https://linkedin.com/in/bharat-chandwani" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="bharat-chandwani" height="30" width="40" /></a>

@@ -81,11 +81,10 @@ project/
 
 # Tech Stack
 
-1. [ReactJS](https://reactjs.org/) for client side.
-2. [NodeJS](https://nodejs.org/en/) for server side.
-3. [Docker](https://www.docker.com/) for containerization.
-4. [Docker Compose](https://docs.docker.com/compose/) for container orchestration.
-5. [MongoDB](https://www.mongodb.com/) for database.
+1. [NodeJS](https://nodejs.org/en/) for server side.
+2. [Docker](https://www.docker.com/) for containerization.
+3. [Docker Compose](https://docs.docker.com/compose/) for container orchestration.
+4. [MongoDB](https://www.mongodb.com/) for database.
 
 # Steps to run the plugin
 

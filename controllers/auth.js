@@ -3,7 +3,7 @@ const jwt = require("../config/jwt");
 
 async function authenticate(req, res) {
     const { email, password } = req.body;
-    if (email == undefined) {
+    if (!email) {
         return res.status(400).json({
             error: "Email is required",
         });
@@ -30,7 +30,7 @@ async function authenticate(req, res) {
         user_id: user._id,
     });
 
-    res.json({ token });
+    res.json({ token: token });
 }
 
 module.exports = {

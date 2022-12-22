@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "mocha --reporter spec --exit"
+    "test": "mocha --exit"
   },
   "author": "Bharat Chandwani",
   "license": "ISC",

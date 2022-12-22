@@ -5,7 +5,6 @@ const User = require("../models/user");
 async function createUser(req, res) {
     const { name, email, password } = req.body;
 
-    // try {
     // Create a new user
     const user = await User.findOne({ email });
     if (user) {
@@ -16,22 +15,14 @@ async function createUser(req, res) {
         });
         return;
     }
-    const newUser = User({ name, email, password });
+    const newUser = new User({ name, email, password });
     // Save the user to the database
     await newUser.save();
     res.json({
+        id: newUser._id,
         email: newUser.email,
         user_creation: "success",
     });
-    // }
-    // catch (err) {
-    //     console.error(err);
-    //     res.status(401).json({
-    //         email: email,
-    //         user_creation: "failed",
-    //         reason: "email already exists",
-    //     });
-    // }
 }
 
 async function userInfo(req, res) {

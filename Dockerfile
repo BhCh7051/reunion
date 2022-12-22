@@ -1,18 +1,18 @@
 FROM node:12-alpine
-Create the app directory
 
+# Create the app directory
 WORKDIR /usr/src/app
-Install dependencies
 
+# Install dependencies
 COPY package*.json ./ 
 RUN npm install
-Copy the source code
 
+# Copy the source code
 COPY . .
+
 # Expose the app's port
-
 EXPOSE 7979
-Start the app
 
+# Start the app
 CMD ["node", "app.js"]
 

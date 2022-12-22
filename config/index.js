@@ -4,7 +4,7 @@ config();
 
 // server connection config
 const PORT = process.env.PORT || 8000;
-const ENV = process.env.port || production;
+const ENV = process.env.port || "production";
 
 // database connection config variables
 const MONGO_USER = process.env.MONGO_USER;

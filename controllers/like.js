@@ -1,8 +1,10 @@
+// Description: This file contains controller functions for liking and unliking posts
 const mongoose = require("mongoose");
 const Post = require("../models/post");
 const User = require("../models/user");
 const jwt = require("../config/jwt");
 
+// Like a post
 async function likePost(req, res) {
     const { user_id } = req.user;
     const { id } = req.params;
@@ -46,6 +48,7 @@ async function likePost(req, res) {
     res.json({ message: "Post liked successfully", success: true });
 }
 
+// Unlike a post
 async function unlikePost(req, res) {
     const { user_id } = req.user;
     const { id } = req.params;

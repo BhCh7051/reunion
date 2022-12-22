@@ -1,8 +1,10 @@
+// Description: This file contains controller functions for the post routes
 const mongoose = require("mongoose");
 const Post = require("../models/post");
 const User = require("../models/user");
 const jwt = require("../config/jwt");
 
+// Create a new post
 async function createPost(req, res) {
     const { user_id } = req.user;
     const { title, description } = req.body;
@@ -39,6 +41,7 @@ async function createPost(req, res) {
     });
 }
 
+// Delete a preexisting post by postID
 async function deletePost(req, res) {
     const { user_id } = req.user;
     const { id } = req.params;
@@ -76,6 +79,7 @@ async function deletePost(req, res) {
     res.json({ message: "Post deleted successfully", success: true });
 }
 
+// Get a post by postID
 async function getPost(req, res) {
     const { id } = req.params;
 
@@ -108,6 +112,7 @@ async function getPost(req, res) {
     });
 }
 
+// Get all posts for the authenticated user
 async function getAllPosts(req, res) {
     const { user_id } = req.user;
 
@@ -121,7 +126,6 @@ async function getAllPosts(req, res) {
     }
 
     // For each post, populate the comments and likes fields
-
     const posts = await Promise.all(
         user.posts.map(async (post) => {
             const comments = await Post.findById(post._id).populate(

@@ -1,3 +1,4 @@
+// Description: This file contains the schema for the post model.
 const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema({

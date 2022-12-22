@@ -1,6 +1,8 @@
+// Description: This file contains controller for authentication
 const User = require("../models/user");
 const jwt = require("../config/jwt");
 
+// Authenticate a user
 async function authenticate(req, res) {
     const { email, password } = req.body;
     if (!email) {
@@ -32,6 +34,7 @@ async function authenticate(req, res) {
 
     res.json({ token: token });
 }
+
 
 module.exports = {
     authenticate,

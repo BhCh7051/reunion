@@ -1,3 +1,4 @@
+// Description: This file contains the user model schema
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 

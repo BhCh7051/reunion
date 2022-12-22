@@ -1,4 +1,4 @@
-// imports
+// Description: This file contains the database connection string and the connection function
 const mongoose = require("mongoose");
 const {
     MONGO_DATABASE,
@@ -9,6 +9,7 @@ const {
     ENV,
 } = require("../config");
 
+// connect to database
 const username = encodeURIComponent(MONGO_USER);
 const password = encodeURIComponent(MONGO_PASSWORD);
 const database = encodeURIComponent(MONGO_DATABASE);
@@ -19,6 +20,7 @@ const authSource = encodeURIComponent("admin");
 mongoose.set("strictQuery", true);
 
 const dbConnectionStringURI = `mongodb+srv://${username}:${password}@${url}/?retryWrites=true&w=majority`;
+
 
 mongoose.connect(dbConnectionStringURI, {
     useNewUrlParser: true,

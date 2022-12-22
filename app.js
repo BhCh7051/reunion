@@ -1,3 +1,4 @@
+// Description: This file is the entry point of the application
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -47,4 +48,5 @@ const main = async () => {
     }
 };
 
+// Start the server
 main();

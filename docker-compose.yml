@@ -5,23 +5,20 @@ services:
   server:
     build: ./
     environment:
-      - ENV=dev
-      - MONGO_USER=root
-      - MONGO_PASSWORD=example
-      - MONGO_URL=db
+      - MONGO_USER=qwert-12345
+      - MONGO_PASSWORD=DgziTFvjoCqnjjvT
+      - MONGO_URL=reunion.d3uprge.mongodb.net
       - MONGO_PORT=27017
       - MONGO_DATABASE=social-media
       - JWT_SECRET=secret
       - JWT_EXPIRES_IN=1d
     ports:
-      - "7001:7001"
-    depends_on:
-      - db
-
-  # database
-  db:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      - "7001:7001"  
+    command: npm start
+    volumes:
+      - .:/app
+  test:
+    build: .
+    command: npm test
+    volumes:
+      - .:/app

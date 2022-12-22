@@ -1,7 +1,9 @@
+// Description: This file contains controllers to create a new user and get the user info
 const bcrypt = require("bcryptjs");
 const jwt = require("../config/jwt");
 const User = require("../models/user");
 
+// Create a new user
 async function createUser(req, res) {
     const { name, email, password } = req.body;
 
@@ -25,6 +27,7 @@ async function createUser(req, res) {
     });
 }
 
+// Get the user information
 async function userInfo(req, res) {
     const { user_id } = req.user;
     const user = await User.findById(user_id)

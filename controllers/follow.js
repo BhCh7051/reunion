@@ -1,7 +1,9 @@
+// Description: This file contains controller for following and unfollowing users
 const mongoose = require("mongoose");
 const User = require("../models/user");
 const jwt = require("../config/jwt");
 
+// Follow a user
 async function follow(req, res) {
     const { user_id } = req.user;
     const { id } = req.params;
@@ -45,6 +47,7 @@ async function follow(req, res) {
     res.json({ message: "Followed user successfully", success: true });
 }
 
+// Unfollow a user
 async function unfollow(req, res) {
     const { user_id } = req.user;
     const { id } = req.params;

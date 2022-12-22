@@ -1,13 +1,15 @@
+// Description: This file contains jsonwebtoken functions
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET, JWT_EXPIRES_IN } = require("../config");
 const jwtSecret = JWT_SECRET;
 const expiry = JWT_EXPIRES_IN;
 
+// Jsonwebtoken Sign a token with the user's id and a secret
 function signToken(payload) {
     return jwt.sign(payload, jwtSecret, { expiresIn: expiry });
 }
 
-
+// Jsonwebtoken Verify a request token with the user's id and a secret
 function verifyToken(req, res, next) {
     const header = req.headers["authorization"];
     if (typeof header !== "undefined") {

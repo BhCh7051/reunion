@@ -1,8 +1,10 @@
+// Description: This file contains controller for the comment route
 const mongoose = require("mongoose");
 const Post = require("../models/post");
 const User = require("../models/user");
 const jwt = require("../config/jwt");
 
+// Add a comment to a post
 async function addComment(req, res) {
     const { user_id } = req.user;
     const { id } = req.params;

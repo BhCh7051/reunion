@@ -1,3 +1,4 @@
+// Description: This file contains the tests for the API endpoints
 request = require("supertest");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
@@ -8,7 +9,7 @@ chai.use(chaiHttp);
 let rootJwtToken,
     user_id = "63a3e3df6ca6d3824fc3eca2",
     post_id,
-    anotherPost_id = "63a3c79c0fcf805a54137d8a";
+    anotherPost_id = "63a3f225c230cf06a8b1bdd1";
 
 describe("POST /api/authenticate", () => {
     it("should return an error if the email is missing", (done) => {

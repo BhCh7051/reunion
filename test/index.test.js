@@ -42,6 +42,7 @@ describe("POST /api/authenticate", () => {
                 done();
             });
     });
+
     it("should authenticate a user and return a JWT token", (done) => {
         chai.request(server)
             .post("/api/authenticate")
@@ -70,6 +71,7 @@ describe("POST /api/follow/:user_id", () => {
                 done();
             });
     });
+
     it("should return an error if the user is already following the user", (done) => {
         chai.request(server)
             .post(`/api/follow/${user_id}`)
@@ -82,6 +84,7 @@ describe("POST /api/follow/:user_id", () => {
                 done();
             });
     });
+
     it("should return an error if the user is trying to follow themselves", (done) => {
         chai.request(server)
             .post(`/api/follow/${authenticatedUser_id}`)
@@ -94,6 +97,7 @@ describe("POST /api/follow/:user_id", () => {
                 done();
             });
     });
+
     it("should return an error if the user not found", (done) => {
         chai.request(server)
             .post(`/api/follow/notaUserID`)
@@ -117,6 +121,7 @@ describe("POST /api/unfollow/:user_id", () => {
                 done();
             });
     });
+
     it("should return an error if the user is not following the user", (done) => {
         chai.request(server)
             .post(`/api/unfollow/${user_id}`)
@@ -129,6 +134,7 @@ describe("POST /api/unfollow/:user_id", () => {
                 done();
             });
     });
+
     it("should return an error if the user d not found", (done) => {
         chai.request(server)
             .post(`/api/unfollow/notaUserID`)
@@ -177,6 +183,7 @@ describe("POST /api/posts/", () => {
                 done();
             });
     });
+
     it("should return an error if the title is not provided", (done) => {
         chai.request(server)
             .post("/api/posts/")
@@ -192,6 +199,7 @@ describe("POST /api/posts/", () => {
                 done();
             });
     });
+
     it("should return an error if the description is not provided", (done) => {
         chai.request(server)
             .post("/api/posts/")
@@ -221,21 +229,18 @@ describe("POST /api/like/:post_id", () => {
             });
     });
 
-    if (
-        ("should return an error if the user has already liked the post",
-        (done) => {
-            chai.request(server)
-                .post(`/api/like/${anotherPost_id}`)
-                .set("Authorization", rootJwtToken)
-                .end((err, res) => {
-                    res.should.have.status(400);
-                    res.body.should.have
-                        .property("error")
-                        .eql("You have already liked this post");
-                    done();
-                });
-        })
-    );
+    it("should return an error if the user has already liked the post", (done) => {
+        chai.request(server)
+            .post(`/api/like/${anotherPost_id}`)
+            .set("Authorization", rootJwtToken)
+            .end((err, res) => {
+                res.should.have.status(409);
+                res.body.should.have
+                    .property("error")
+                    .eql("Post already liked");
+                done();
+            });
+    });
 
     it("should return an error if the post is not found", (done) => {
         chai.request(server)
@@ -347,6 +352,7 @@ describe("DELETE /api/posts/:{post_id}", () => {
                 done();
             });
     });
+
     it("should return an error if the post does not exist", (done) => {
         chai.request(server)
             .delete(`/api/posts/${post_id}`)

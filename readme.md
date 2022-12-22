@@ -5,8 +5,9 @@
 This API allows users to authenticate, follow other users, create and delete posts, like and unlike posts, and add comments to posts on a social media platform.
 
 # Database Schema
-
+<p align="center">
 ![DataBase Schema](https://mermaid.ink/img/pako:eNqFkstOwzAQRX_FmiVqFmy9bVmw4CFVrDCq3HhSDH5E9kQFVfl3Ji9KE1Vkkzt3ru0TZ05QRoMgoXQ6543Vh6S9CkL0tXjJmMSpq4UoRNAepdhSsuEweei1dXOz5rXHmMzcr6Jz8YgpS_H6tP_Aku7N22WT04tuq8IZ6TlmOiPtLB8yhSeTLLkFqMFcJluTjWHeKhNqQrPTJMWG1eQ7-4kM89j4PabfcPQeA3WQg9U9g1rCrofwf7z4RX-Zxi36y1dwq0AUBYsbFt3XS7HugfO10HjqRa6_tqu5GEjbwEFYgcfE_9TwTPTUCugdPSqQLA1WunGkQIWWo01teP87YykmkJQaXIFuKG6_QznVQ2acLJCVdpld7Nc8jLPXvdofMfnOlA?type=png)
+</p>
 
 The database consists of the following collections:
     users: stores the user documents, with fields for the user's name, email, password, followers, and followings.

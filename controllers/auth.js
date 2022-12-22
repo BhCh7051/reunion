@@ -35,7 +35,6 @@ async function authenticate(req, res) {
     res.json({ token: token });
 }
 
-
 module.exports = {
     authenticate,
 };

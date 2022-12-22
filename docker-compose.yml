@@ -13,7 +13,7 @@ services:
       - JWT_SECRET=secret
       - JWT_EXPIRES_IN=1d
     ports:
-      - "7001:7001"  
+      - "7001:7001"
     command: npm start
     volumes:
       - .:/app

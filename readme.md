@@ -124,7 +124,7 @@ project/
 3. [Docker Compose](https://docs.docker.com/compose/) for container orchestration.
 4. [MongoDB](https://www.mongodb.com/) for database.
 
-# Steps to run the plugin
+# Steps to run the App
 
 ## Start the docker container
 

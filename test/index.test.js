@@ -2,12 +2,14 @@
 request = require("supertest");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-const server = require("../app.js");
+// const server = require("../app.js");
+const server = "https://social-media-reunion.onrender.com";
 const should = chai.should();
 
 chai.use(chaiHttp);
 let rootJwtToken,
     user_id = "63a3e3df6ca6d3824fc3eca2",
+    authenticatedUser_id = "63a3e55a4a82405246ae8803",
     post_id,
     anotherPost_id = "63a3f225c230cf06a8b1bdd1";
 
@@ -68,6 +70,40 @@ describe("POST /api/follow/:user_id", () => {
                 done();
             });
     });
+    it("should return an error if the user is already following the user", (done) => {
+        chai.request(server)
+            .post(`/api/follow/${user_id}`)
+            .set("Authorization", rootJwtToken)
+            .end((err, res) => {
+                res.should.have.status(400);
+                res.body.should.have
+                    .property("error")
+                    .eql("You are already following this user");
+                done();
+            });
+    });
+    it("should return an error if the user is trying to follow themselves", (done) => {
+        chai.request(server)
+            .post(`/api/follow/${authenticatedUser_id}`)
+            .set("Authorization", rootJwtToken)
+            .end((err, res) => {
+                res.should.have.status(400);
+                res.body.should.have
+                    .property("error")
+                    .eql("You cannot follow yourself");
+                done();
+            });
+    });
+    it("should return an error if the user not found", (done) => {
+        chai.request(server)
+            .post(`/api/follow/notaUserID`)
+            .set("Authorization", rootJwtToken)
+            .end((err, res) => {
+                res.should.have.status(404);
+                res.body.should.have.property("error").eql("User not found");
+                done();
+            });
+    });
 });
 
 describe("POST /api/unfollow/:user_id", () => {
@@ -78,6 +114,28 @@ describe("POST /api/unfollow/:user_id", () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.have.property("success").eql(true);
+                done();
+            });
+    });
+    it("should return an error if the user is not following the user", (done) => {
+        chai.request(server)
+            .post(`/api/unfollow/${user_id}`)
+            .set("Authorization", rootJwtToken)
+            .end((err, res) => {
+                res.should.have.status(400);
+                res.body.should.have
+                    .property("error")
+                    .eql("You are not following this user");
+                done();
+            });
+    });
+    it("should return an error if the user d not found", (done) => {
+        chai.request(server)
+            .post(`/api/unfollow/notaUserID`)
+            .set("Authorization", rootJwtToken)
+            .end((err, res) => {
+                res.should.have.status(404);
+                res.body.should.have.property("error").eql("User not found");
                 done();
             });
     });
@@ -119,6 +177,36 @@ describe("POST /api/posts/", () => {
                 done();
             });
     });
+    it("should return an error if the title is not provided", (done) => {
+        chai.request(server)
+            .post("/api/posts/")
+            .set("Authorization", rootJwtToken)
+            .send({
+                description: "This is a test post", // missing title
+            })
+            .end((err, res) => {
+                res.should.have.status(400);
+                res.body.should.have
+                    .property("error")
+                    .eql("Title and description are required");
+                done();
+            });
+    });
+    it("should return an error if the description is not provided", (done) => {
+        chai.request(server)
+            .post("/api/posts/")
+            .set("Authorization", rootJwtToken)
+            .send({
+                title: "This is a test post", //missing description
+            })
+            .end((err, res) => {
+                res.should.have.status(400);
+                res.body.should.have
+                    .property("error")
+                    .eql("Title and description are required");
+                done();
+            });
+    });
 });
 
 describe("POST /api/like/:post_id", () => {
@@ -129,6 +217,46 @@ describe("POST /api/like/:post_id", () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.have.property("success").eql(true);
+                done();
+            });
+    });
+
+    if (
+        ("should return an error if the user has already liked the post",
+        (done) => {
+            chai.request(server)
+                .post(`/api/like/${anotherPost_id}`)
+                .set("Authorization", rootJwtToken)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.have
+                        .property("error")
+                        .eql("You have already liked this post");
+                    done();
+                });
+        })
+    );
+
+    it("should return an error if the post is not found", (done) => {
+        chai.request(server)
+            .post(`/api/like/notaPostID`)
+            .set("Authorization", rootJwtToken)
+            .end((err, res) => {
+                res.should.have.status(404);
+                res.body.should.have.property("error").eql("Post not found");
+                done();
+            });
+    });
+
+    it("should return an error if the user is author of the post", (done) => {
+        chai.request(server)
+            .post(`/api/like/${post_id}`)
+            .set("Authorization", rootJwtToken)
+            .end((err, res) => {
+                res.should.have.status(403);
+                res.body.should.have
+                    .property("message")
+                    .eql("You cannot like your own post");
                 done();
             });
     });
@@ -145,6 +273,17 @@ describe("POST /api/unlike/:post_id", () => {
                 done();
             });
     });
+
+    it("should return an error if the user has not liked the post", (done) => {
+        chai.request(server)
+            .post(`/api/unlike/${anotherPost_id}`)
+            .set("Authorization", rootJwtToken)
+            .end((err, res) => {
+                res.should.have.status(409);
+                res.body.should.have.property("error").eql("Post not liked");
+                done();
+            });
+    });
 });
 
 describe("POST /api/comment/:post_id", () => {
@@ -158,6 +297,22 @@ describe("POST /api/comment/:post_id", () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.have.property("id");
+                done();
+            });
+    });
+
+    it("should return an error if the comment is not provided", (done) => {
+        chai.request(server)
+            .post(`/api/comment/${post_id}`)
+            .set("Authorization", rootJwtToken)
+            .send({
+                // missing comment
+            })
+            .end((err, res) => {
+                res.should.have.status(400);
+                res.body.should.have
+                    .property("error")
+                    .eql("Comment is required");
                 done();
             });
     });
@@ -189,6 +344,16 @@ describe("DELETE /api/posts/:{post_id}", () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.have.property("success").eql(true);
+                done();
+            });
+    });
+    it("should return an error if the post does not exist", (done) => {
+        chai.request(server)
+            .delete(`/api/posts/${post_id}`)
+            .set("Authorization", rootJwtToken)
+            .end((err, res) => {
+                res.should.have.status(404);
+                res.body.should.have.property("error").eql("Post not found");
                 done();
             });
     });

@@ -17,7 +17,7 @@ async function addComment(req, res) {
         //consider this bad input, record not found.
         return res.status(404).json({ error: "Post not found" });
     }
-    
+
     // Check that the comment is provided
     if (!comment) {
         return res.status(400).json({ error: "Comment is required" });

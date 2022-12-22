@@ -20,7 +20,9 @@ function verifyToken(req, res, next) {
             req.user = jwt.verify(token, jwtSecret);
             next();
         } catch (err) {
-            res.status(401).json("Token not valid, please authenticate again");
+            res.status(401).json({
+                error: "Token not valid, please authenticate again",
+            });
             return;
         }
     } else {

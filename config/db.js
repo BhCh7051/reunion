@@ -21,7 +21,6 @@ mongoose.set("strictQuery", true);
 
 const dbConnectionStringURI = `mongodb+srv://${username}:${password}@${url}/?retryWrites=true&w=majority`;
 
-
 mongoose.connect(dbConnectionStringURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

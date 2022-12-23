@@ -1,5 +1,5 @@
 // Description: This file is the entry point of the application
-const express = require("express");
+const express = require("express"); 
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
@@ -18,9 +18,11 @@ const main = async () => {
         // middleware to parse request body
 
         // Log all requests to the console
+        // "combined" outputs the Apache style LOGs
         app.use(morgan("combined"));
 
         // Enable CORS for all routes
+        // CORS is a mechanism that allows restricted resources on a web page to be requested from another domain outside the domain from which the first resource was served.
         app.use((req, res, next) => {
             res.header("Access-Control-Allow-Origin", "*");
             res.header(
@@ -31,6 +33,7 @@ const main = async () => {
         });
 
         // Use the body-parser middleware to parse request bodies
+        // This middleware will parse all bodies and make them available on req.body
         app.use(bodyParser.json());
 
         // Use the routes defined in the routes/index.js file

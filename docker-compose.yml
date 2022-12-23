@@ -5,9 +5,9 @@ services:
   server:
     build: ./
     environment:
-      - MONGO_USER=qwert-12345
-      - MONGO_PASSWORD=DgziTFvjoCqnjjvT
-      - MONGO_URL=reunion.d3uprge.mongodb.net
+      - MONGO_USER=user
+      - MONGO_PASSWORD=password
+      - MONGO_URL=localhost
       - MONGO_PORT=27017
       - MONGO_DATABASE=social-media
       - JWT_SECRET=secret

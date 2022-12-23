@@ -1,5 +1,4 @@
 // Description: Import config variables from .env file
-
 const { config } = require("dotenv");
 
 config();

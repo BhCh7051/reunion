@@ -49,6 +49,7 @@ userSchema.methods.comparePassword = async function (password) {
 };
 
 userSchema.pre("save", async function (next) {
+   // Check if the password is modified, if not, return to next route
     if (!this.isModified("password")) return next();
 
     const salt = "$2a$10$juvOZ0dxG20ugXTWn8dTD.";

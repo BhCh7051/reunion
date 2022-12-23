@@ -85,7 +85,7 @@ sequenceDiagram
 
 The client sends a request to the API server, which processes the request, accesses the database, and returns a response to the client.
 
-```bash
+```
 project/
 ├── config/
 │ ├── db.js (MongoDB connection configuration)
@@ -126,7 +126,7 @@ project/
 
 # Steps to run the App
 
-Set up .env variables
+## Set up .env variables
 
 ```
 # write env variables to file
@@ -139,7 +139,7 @@ ENV = dev
 MONGO_DATABASE  = social-media
 MONGO_PASSWORD = password
 MONGO_PORT = 27017
-MONGO_USER = admin
+MONGO_USER = user
 MONGO_URL = localhost
 
 # jwt config

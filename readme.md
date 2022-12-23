@@ -126,6 +126,27 @@ project/
 
 # Steps to run the App
 
+Set up .env variables
+
+```
+# write env variables to file
+
+# server config
+PORT = 7001
+ENV = dev
+
+# database config
+MONGO_DATABASE  = social-media
+MONGO_PASSWORD = password
+MONGO_PORT = 27017
+MONGO_USER = admin
+MONGO_URL = localhost
+
+# jwt config
+JWT_SECRET = secret
+JWT_EXPIRES_IN = 1d
+```
+
 ## Start the docker container
 
 ```bash
